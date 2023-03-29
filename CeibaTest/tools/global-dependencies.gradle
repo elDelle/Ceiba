@@ -1,0 +1,49 @@
+ext {
+    // Kotlin
+    kotlin_version = '1.5.31'
+
+    // Project
+    minSdkVersion = 21
+    compileSdkVersion = 30
+    targetSdkVersion = 32
+
+    // Support Libraries
+    appCompatVersion = '1.4.2'
+    ktxVersion = '1.8.0'
+    materialVersion = '1.6.1'
+    constraintLayoutVersion = "2.1.4"
+    supportVersion = '1.2.0'
+
+    // Dagger
+    daggerVersion = '2.40.5'
+    daggerAndroidVersion = '2.40.5'
+
+    // Navigation component
+    navigationVersion = '2.4.2'
+
+    // ViewModel
+    lifecycleVersion = '2.4.1'
+    lifecycleExtensions = '2.1.0'
+    lifecycleCommonVersion = '2.4.1'
+
+    //Coroutines
+    coroutinesVersion = '1.6.4'
+
+    // Groupie
+    groupieVersion = '2.9.0'
+
+    //Network
+    gsonVersion = "2.8.2"
+
+    // Retrofit
+    retrofitVersion = "2.9.0"
+    retrofitSerializationVersion = "0.8.0"
+    retrofitInterceptorVersion = "5.0.0-alpha.3"
+
+    // Test dependencies
+    mockitoVersion = "3.5.11"
+    mockitoKotlin2Version = "2.2.0"
+    mockk = "1.9.3"
+    testArchCoreVersion = "2.1.0"
+    adapterRxJava2Version = "2.5.0"
+}
