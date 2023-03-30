@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dellepiane.ceibatest.R
 import com.dellepiane.ceibatest.databinding.ActivityUsersBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+@AndroidEntryPoint
 class UsersActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUsersBinding

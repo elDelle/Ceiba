@@ -1,6 +1,6 @@
 package com.dellepiane.ceibatest.domain.model
 
-import com.dellepiane.ceibatest.data.UserResponse
+import com.dellepiane.ceibatest.data.model.UserResponse
 
 data class User(
     val id: Int? = null,

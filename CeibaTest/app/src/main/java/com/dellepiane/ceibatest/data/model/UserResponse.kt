@@ -1,4 +1,4 @@
-package com.dellepiane.ceibatest.data
+package com.dellepiane.ceibatest.data.model
 
 data class UserResponse(
     val website: String? = null,

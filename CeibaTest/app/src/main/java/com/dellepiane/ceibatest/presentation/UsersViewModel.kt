@@ -4,13 +4,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dellepiane.ceibatest.domain.usecases.GetAllUsersUseCase
-import com.dellepiane.ceibatest.domain.User
+import com.dellepiane.ceibatest.domain.model.User
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UsersViewModel constructor(private val getAllUsersUseCase: GetAllUsersUseCase) : ViewModel() {
+@HiltViewModel
+class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllUsersUseCase) : ViewModel() {
 
     private var _showLoading: MutableLiveData<Boolean> = MutableLiveData()
     var showLoading = _showLoading

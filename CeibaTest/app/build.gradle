@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -53,11 +54,9 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.retrofitInterceptorVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
 
-    //Dagger
-    implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.ext.hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.ext.hiltVersion"
 
     //architecture components
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.ext.lifecycleCommonVersion"

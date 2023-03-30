@@ -6,8 +6,9 @@ import com.dellepiane.ceibatest.resultOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class GetAllUsersUseCase constructor(private val repository: Repository) {
+class GetAllUsersUseCase @Inject constructor(private val repository: Repository) {
 
     fun execute(): Flow<Result<List<User>>> {
         return repository.getAllUsers().map {

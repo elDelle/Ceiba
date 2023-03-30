@@ -14,8 +14,8 @@ ext {
     constraintLayoutVersion = "2.1.4"
     supportVersion = '1.2.0'
 
-    // Dagger
-    daggerVersion = '2.40.5'
+    // Hilt
+    hiltVersion = '2.44'
     daggerAndroidVersion = '2.40.5'
 
     // Navigation component
