@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/ceiba8dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/ceiba1dp">
+
+    <LinearLayout
+        android:id="@+id/layout_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/ceiba12dp"
+        android:paddingTop="@dimen/ceiba8dp"
+        android:paddingBottom="@dimen/ceiba12dp">
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Leanne Graham" />
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/ceiba4dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@android:drawable/ic_menu_call"
+            tools:text="1-770-736-8031 x46442" />
+
+        <TextView
+            android:id="@+id/textView_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/ceiba4dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@android:drawable/sym_action_email"
+            tools:text="Sincere@april.biz" />
+
+        <TextView
+            android:id="@+id/textView_show_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/ceiba8dp"
+            android:drawablePadding="@dimen/ceiba4dp"
+            android:text="@string/show_posts"
+            android:textAllCaps="true"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

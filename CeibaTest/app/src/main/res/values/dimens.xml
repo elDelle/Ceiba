@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ceiba30dp">30dp</dimen>
+    <dimen name="ceiba20dp">20dp</dimen>
+    <dimen name="ceiba12dp">12dp</dimen>
+    <dimen name="ceiba8dp">8dp</dimen>
+    <dimen name="ceiba6dp">6dp</dimen>
+    <dimen name="ceiba4dp">4dp</dimen>
+    <dimen name="ceiba1dp">1dp</dimen>
+</resources>
