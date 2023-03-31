@@ -2,6 +2,8 @@ package com.dellepiane.ceibatest.presentation
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +16,12 @@ import com.dellepiane.ceibatest.databinding.FragmentUsersBinding
 import com.dellepiane.ceibatest.domain.model.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 
-class UsersFragment : Fragment() {
+@AndroidEntryPoint
+class UsersFragment :
+    Fragment(),
+    TextWatcher {
 
     private lateinit var binding: FragmentUsersBinding
 
@@ -43,6 +49,7 @@ class UsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         configureRecyclerView()
         bindViewModel()
+        binding.editTextSearchUser.addTextChangedListener(this@UsersFragment)
         viewModel.getAllUsers()
     }
 
@@ -87,5 +94,18 @@ class UsersFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = UsersFragment()
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        // Nothing to do
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        // Nothing to do
+    }
+
+    override fun afterTextChanged(editable: Editable?) {
+        groupAdapter.clear()
+        viewModel.getUsersByName(editable.toString())
     }
 }

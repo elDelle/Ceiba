@@ -55,8 +55,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:$rootProject.ext.hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$rootProject.ext.hiltVersion"
+    implementation "com.google.dagger:hilt-android:2.45"
+    kapt "com.google.dagger:hilt-compiler:2.45"
+
 
     //architecture components
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.ext.lifecycleCommonVersion"

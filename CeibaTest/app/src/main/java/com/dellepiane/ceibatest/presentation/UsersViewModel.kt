@@ -15,11 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllUsersUseCase) : ViewModel() {
 
-    private var _showLoading: MutableLiveData<Boolean> = MutableLiveData()
-    var showLoading = _showLoading
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading = _showLoading
 
-    private var _getUsers: MutableLiveData<List<User>> = MutableLiveData()
-    var getUsers = _getUsers
+    private val _getUsers: MutableLiveData<List<User>> = MutableLiveData()
+    val getUsers = _getUsers
+
+    private lateinit var usersOriginalList: List<User>
 
     fun getAllUsers() {
         viewModelScope.launch {
@@ -31,11 +33,19 @@ class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllU
         return flow {
             getAllUsersUseCase.execute().collect { result ->
                 result.onSuccess {
-                    _getUsers.value = it
+                    usersOriginalList = it
+                    _getUsers.value = usersOriginalList
                 }.onFailure {
                     it
                 }
             }
         }
+    }
+
+    fun getUsersByName(name: String) {
+        val filteredList = usersOriginalList.filter {
+            it.name?.lowercase()?.contains(name.lowercase()) == true
+        }
+        _getUsers.value = filteredList
     }
 }

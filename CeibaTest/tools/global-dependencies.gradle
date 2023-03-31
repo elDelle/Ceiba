@@ -16,7 +16,7 @@ ext {
 
     // Hilt
     hiltVersion = '2.44'
-    daggerAndroidVersion = '2.40.5'
+    androidxHiltVersion = '2.44'
 
     // Navigation component
     navigationVersion = '2.4.2'
