@@ -29,6 +29,9 @@ ext {
     //Coroutines
     coroutinesVersion = '1.6.4'
 
+    //Room
+    roomVersion = '2.5.1'
+
     // Groupie
     groupieVersion = '2.9.0'
 

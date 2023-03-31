@@ -7,4 +7,6 @@
     <dimen name="ceiba6dp">6dp</dimen>
     <dimen name="ceiba4dp">4dp</dimen>
     <dimen name="ceiba1dp">1dp</dimen>
+
+    <dimen name="ceiba20sp">20sp</dimen>
 </resources>

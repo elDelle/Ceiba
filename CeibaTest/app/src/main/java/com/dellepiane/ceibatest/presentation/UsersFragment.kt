@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dellepiane.ceibatest.databinding.FragmentUsersBinding
 import com.dellepiane.ceibatest.domain.model.User
+import com.dellepiane.ceibatest.presentation.UserItemView.UserItemListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UsersFragment :
     Fragment(),
+    UserItemListener,
     TextWatcher {
 
     private lateinit var binding: FragmentUsersBinding
@@ -29,12 +31,16 @@ class UsersFragment :
 
     private val groupAdapter = GroupAdapter<GroupieViewHolder>()
 
+    private var listener: UsersListListener? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        listener = context as? UsersListListener
     }
 
     override fun onDetach() {
         super.onDetach()
+        listener = null
     }
 
     override fun onCreateView(
@@ -69,6 +75,10 @@ class UsersFragment :
             viewLifecycleOwner,
             Observer(this::handleUsers)
         )
+        viewModel.showFailure.observe(
+            viewLifecycleOwner,
+            Observer(this::showError)
+        )
     }
 
     private fun showLoading(show: Boolean) {
@@ -79,6 +89,7 @@ class UsersFragment :
     }
 
     private fun handleUsers(users: List<User>) {
+        showUsersList(true)
         groupAdapter.clear()
         groupAdapter.addAll(
             users.map {
@@ -87,13 +98,21 @@ class UsersFragment :
         )
     }
 
-    private fun createUser(user: User): UserItemView {
-        return UserItemView(user)
+    private fun showError(error: String) {
+        showUsersList(false)
+        binding.textViewErrorMessage.text = error
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = UsersFragment()
+    private fun createUser(user: User): UserItemView {
+        return UserItemView(this, user)
+    }
+
+    private fun showUsersList(show: Boolean) {
+        binding.apply {
+            textInputLayoutSearchUser.isVisible = show
+            recyclerViewUsers.isVisible = show
+            textViewErrorMessage.isVisible = show.not()
+        }
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -107,5 +126,13 @@ class UsersFragment :
     override fun afterTextChanged(editable: Editable?) {
         groupAdapter.clear()
         viewModel.getUsersByName(editable.toString())
+    }
+
+    override fun onShowPostsClicked(userId: Int) {
+        listener?.onShowPostClicked(userId)
+    }
+
+    interface UsersListListener {
+        fun onShowPostClicked(userId: Int)
     }
 }

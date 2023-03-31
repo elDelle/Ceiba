@@ -6,7 +6,10 @@ import com.dellepiane.ceibatest.databinding.ViewUserBinding
 import com.dellepiane.ceibatest.domain.model.User
 import com.xwray.groupie.viewbinding.BindableItem
 
-class UserItemView(private val user: User) : BindableItem<ViewUserBinding>() {
+class UserItemView(
+    private val listener: UserItemListener?,
+    private val user: User
+) : BindableItem<ViewUserBinding>() {
 
     private lateinit var binding: ViewUserBinding
 
@@ -25,6 +28,15 @@ class UserItemView(private val user: User) : BindableItem<ViewUserBinding>() {
             textViewName.text = user.name
             textViewPhone.text = user.phone
             textViewMail.text = user.email
+            textViewShowPosts.setOnClickListener {
+                user.id?.let {
+                    listener?.onShowPostsClicked(it)
+                }
+            }
         }
+    }
+
+    interface UserItemListener {
+        fun onShowPostsClicked(userId: Int)
     }
 }

@@ -3,9 +3,10 @@ package com.dellepiane.ceibatest.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dellepiane.ceibatest.domain.usecases.GetAllUsersUseCase
 import com.dellepiane.ceibatest.domain.model.User
+import com.dellepiane.ceibatest.domain.usecases.GetAllUsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -13,7 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllUsersUseCase) : ViewModel() {
+class UsersViewModel @Inject constructor(
+    private val getAllUsersUseCase: GetAllUsersUseCase
+) : ViewModel() {
 
     private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
     val showLoading = _showLoading
@@ -21,23 +24,27 @@ class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllU
     private val _getUsers: MutableLiveData<List<User>> = MutableLiveData()
     val getUsers = _getUsers
 
+    private val _showFailure: MutableLiveData<String> = MutableLiveData()
+    val showFailure = _showFailure
+
     private lateinit var usersOriginalList: List<User>
 
     fun getAllUsers() {
+        showLoading.value = true
         viewModelScope.launch {
-            collectAllUsers().collect()
+            delay(DELAY_TIME)
+            collectAllUsers()
+            showLoading.value = false
         }
     }
 
-    private fun collectAllUsers(): Flow<Result<List<User>>> {
-        return flow {
-            getAllUsersUseCase.execute().collect { result ->
-                result.onSuccess {
-                    usersOriginalList = it
-                    _getUsers.value = usersOriginalList
-                }.onFailure {
-                    it
-                }
+    private suspend fun collectAllUsers() {
+        getAllUsersUseCase.execute().collect { result ->
+            result.onSuccess {
+                usersOriginalList = it
+                _getUsers.value = usersOriginalList
+            }.onFailure {
+                _showFailure.value = it.message
             }
         }
     }
@@ -47,5 +54,9 @@ class UsersViewModel @Inject constructor(private val getAllUsersUseCase: GetAllU
             it.name?.lowercase()?.contains(name.lowercase()) == true
         }
         _getUsers.value = filteredList
+    }
+
+    private companion object {
+        const val DELAY_TIME = 2000L
     }
 }

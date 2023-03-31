@@ -1,4 +1,4 @@
-package com.dellepiane.ceibatest.data.di
+package com.dellepiane.ceibatest.data.remote.di
 
 import dagger.Module
 import dagger.Provides
