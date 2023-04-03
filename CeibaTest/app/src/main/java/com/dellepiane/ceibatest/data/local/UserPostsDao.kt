@@ -12,5 +12,5 @@ interface UserPostsDao {
     suspend fun saveUserPosts(userPosts: List<UserPostEntity>)
 
     @Query(value = "SELECT * FROM UserPostEntity WHERE userId = :userId")
-    fun getUserPosts(userId: Int): Flow<List<UserEntity>>
+    fun getUserPosts(userId: Int): Flow<List<UserPostEntity>>
 }

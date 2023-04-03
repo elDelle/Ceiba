@@ -22,8 +22,10 @@ class UserPostEntity {
 
 fun UserPostEntity.toDomain(): UserPost {
     return UserPost(
+        this.id,
         this.title,
-        this.body
+        this.body,
+        this.userId
     )
 }
 

@@ -1,8 +1,11 @@
 package com.dellepiane.ceibatest.presentation.di
 
 import com.dellepiane.ceibatest.data.remote.Api
-import com.dellepiane.ceibatest.data.repository.RepositoryImpl
-import com.dellepiane.ceibatest.domain.repository.Repository
+import com.dellepiane.ceibatest.data.repository.UserPostsRepositoryImpl
+import com.dellepiane.ceibatest.data.repository.UsersRepositoryImpl
+import com.dellepiane.ceibatest.domain.repository.UserPostsRepository
+import com.dellepiane.ceibatest.domain.repository.UsersRepository
+import com.dellepiane.ceibatest.domain.usecases.GetUserPostsUseCase
 import com.dellepiane.ceibatest.domain.usecases.GetAllUsersUseCase
 import dagger.Binds
 import dagger.Module
@@ -23,8 +26,13 @@ object UsersModule {
     }
 
     @Provides
-    fun provideGetAllUsersUseCase(repository: Repository): GetAllUsersUseCase {
-        return GetAllUsersUseCase(repository)
+    fun provideGetAllUsersUseCase(usersRepository: UsersRepository): GetAllUsersUseCase {
+        return GetAllUsersUseCase(usersRepository)
+    }
+
+    @Provides
+    fun provideGetAllUserPostsUseCase(userPostsRepository: UserPostsRepository): GetUserPostsUseCase {
+        return GetUserPostsUseCase(userPostsRepository)
     }
 
     @Module
@@ -32,6 +40,10 @@ object UsersModule {
     interface BindModules {
         @Binds
         @Singleton
-        fun bindRepository(repositoryImpl: RepositoryImpl): Repository
+        fun bindUsersRepository(usersRepositoryImpl: UsersRepositoryImpl): UsersRepository
+
+        @Binds
+        @Singleton
+        fun bindUserPostsRepository(userPostsRepositoryImpl: UserPostsRepositoryImpl): UserPostsRepository
     }
 }

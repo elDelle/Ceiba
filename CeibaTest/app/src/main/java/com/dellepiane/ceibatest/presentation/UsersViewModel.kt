@@ -30,11 +30,11 @@ class UsersViewModel @Inject constructor(
     private lateinit var usersOriginalList: List<User>
 
     fun getAllUsers() {
-        showLoading.value = true
         viewModelScope.launch {
+            showLoading.postValue(true)
             delay(DELAY_TIME)
+            showLoading.postValue(false)
             collectAllUsers()
-            showLoading.value = false
         }
     }
 
